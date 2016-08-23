@@ -1,0 +1,110 @@
+{
+	"welcome": {
+		"type": "message",
+		"trigger": "manual",
+		"responses": [
+			"Welcome to technical support, my name is @[currentname], how may I help you?",
+			"Welcome to premium technical support, how may I help you?"
+		],
+		"push": "welcome"
+	},
+	
+	"problem": {
+		"type": "message",
+		"condition": "welcome",
+		"conditionlevel": 1,
+		"trigger": "regex",
+		"triggers": [
+			".*(problem|issue).*(computer|pc|windows).*",
+			".*(computer|pc|windows).*(problem|issue).*"
+		],
+		"responses": [
+			"What is the problem?"
+		],
+		"push": "problem"
+	},
+	
+	"scammer": {
+		"type": "message",
+		"trigger": "regex",
+		"triggers": [
+			".*scam(mer)?.*"
+		],
+		"responses": [
+			"No Sir, this is not a scam! We are Microsoft Certified Technicians."
+		],
+		"push": "scam"
+	},
+	
+	"bot": {
+		"type": "message",
+		"trigger": "regex",
+		"triggers": [
+			".* +(ro)?bot.*"
+		],
+		"responses": [
+			"No Sir, I'm not a robot! I am a Microsoft Certified Technician."
+		]
+	},
+	
+	"positive": {
+		"type": "message",
+		"trigger": "regex",
+		"triggers": [
+			"ok.*",
+			"okay.*",
+			".+trust.+you.*"
+		],
+		"pop": [
+			"scam"
+		]
+	},
+	
+	"cert": {
+		"type": "message",
+		"condition": "scam",
+		"conditionlevel": 1,
+		"trigger": "regex",
+		"triggers": [
+			".*(certificate|certification).*",
+			".*proof.*",
+			".*really.*"
+		],
+		"responses": [
+			"<Insert response for proof here>"
+		]
+	},
+	
+	"namequestion": {
+		"type": "message",
+		"trigger": "regex",
+		"triggers": [
+			".*your.*name.*"
+		],
+		"responses": [
+			"My name is @[currentname].",
+			"My name is @[currentname], Sir.",
+			"Sir, my name is @[currentname]."
+		]
+	},
+	
+	"fail": {
+		"type": "message",
+		"trigger": "manual",
+		"responses": [
+			"Sir, I have a hard time understanding you!"
+		]
+	},
+	
+	"currentname": {
+		"type": "fixed",
+		"value": "@[name]"
+	},
+	
+	"name": {
+		"type": "random",
+		"values": [
+			"John", "Lisa"
+		]
+	}
+}
